@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTC Date Time Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        
+        .datetime-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .datetime-display {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+        }
+        
+        .datetime-label {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="datetime-container">
+        <div class="datetime-label">Current UTC Date and Time</div>
+        <div id="datetime-display" class="datetime-display">Loading...</div>
+    </div>
+
+    <script>
+        function formatDateTime() {
+            const now = new Date();
+            
+            // Get UTC components
+            const year = now.getUTCFullYear();
+            const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+            const day = String(now.getUTCDate()).padStart(2, '0');
+            const hours = String(now.getUTCHours()).padStart(2, '0');
+            const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+            
+            // Format as YYYY-MM-DD HH:MM:SS
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+        
+        function updateDateTime() {
+            const datetimeElement = document.getElementById('datetime-display');
+            datetimeElement.textContent = formatDateTime();
+        }
+        
+        // Update immediately when page loads
+        updateDateTime();
+        
+        // Update every second
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>
